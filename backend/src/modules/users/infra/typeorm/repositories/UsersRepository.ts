@@ -1,20 +1,24 @@
-import { getRepository } from 'typeorm'
+import { getRepository, Repository } from 'typeorm'
 
 import { User } from '../entities/User'
 import { IUsersRepository } from '@modules/users/repositories/IUsersRepository'
 
 export class UsersRepository implements IUsersRepository {
-  public async create (email: string): Promise<User> {
-    const usersRepository = getRepository(User)
+  private usersRepository: Repository<User>
 
-    const userExists = await usersRepository.findOne({ email })
+  constructor () {
+    this.usersRepository = getRepository(User)
+  }
+
+  public async create (email: string): Promise<User> {
+    const userExists = await this.usersRepository.findOne({ email })
 
     if (userExists) {
       return userExists
     }
 
-    const user = usersRepository.create({ email })
-    await usersRepository.save(user)
+    const user = this.usersRepository.create({ email })
+    await this.usersRepository.save(user)
 
     return user
   }

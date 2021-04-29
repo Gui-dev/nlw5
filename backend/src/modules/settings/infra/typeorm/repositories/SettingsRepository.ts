@@ -1,4 +1,4 @@
-import { getRepository } from 'typeorm'
+import { getRepository, Repository } from 'typeorm'
 
 import { Setting } from '@modules/settings/infra/typeorm/entities/Setting'
 import { ISettingsRepository } from '@modules/settings/repositories/ISettingsRepository'
@@ -6,17 +6,21 @@ import { ISettingsReposytoryDTO } from '@modules/settings/dtos/ISettingsReposyto
 import { AppError } from '@shared/error/AppError'
 
 export class SettingsRepository implements ISettingsRepository {
-  public async create ({ username, chat }: ISettingsReposytoryDTO): Promise<Setting> {
-    const settingsRepository = getRepository(Setting)
+  private settingsRepository: Repository<Setting>
 
-    const userAlreadyExists = await settingsRepository.findOne({ username })
+  constructor () {
+    this.settingsRepository = getRepository(Setting)
+  }
+
+  public async create ({ username, chat }: ISettingsReposytoryDTO): Promise<Setting> {
+    const userAlreadyExists = await this.settingsRepository.findOne({ username })
 
     if (userAlreadyExists) {
       throw new AppError('User already exists')
     }
 
-    const settings = settingsRepository.create({ username, chat })
-    await settingsRepository.save(settings)
+    const settings = this.settingsRepository.create({ username, chat })
+    await this.settingsRepository.save(settings)
 
     return settings
   }

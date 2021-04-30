@@ -6,6 +6,9 @@ import messagesRoutes from '@modules/messages/infra/http/routes/messages.routes'
 
 const routes = Router()
 
+routes.get('/pages/client', (req, res) => {
+  return res.render('html/client.html')
+})
 routes.use('/settings', settingsRoutes)
 routes.use('/users', usersRoutes)
 routes.use('/messages', messagesRoutes)

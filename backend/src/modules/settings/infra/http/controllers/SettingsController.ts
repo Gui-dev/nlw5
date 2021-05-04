@@ -10,4 +10,12 @@ export class SettingsController {
 
     return response.status(201).json(settings)
   }
+
+  public async show (request: Request, response: Response): Promise<Response> {
+    const { username } = request.params
+    const settingsRepository = new SettingsRepository()
+    const settings = await settingsRepository.findByUsername(username)
+
+    return response.status(201).json(settings)
+  }
 }

@@ -24,4 +24,14 @@ export class SettingsRepository implements ISettingsRepository {
 
     return settings
   }
+
+  public async findByUsername (username: string): Promise<Setting> {
+    const settings = await this.settingsRepository.findOne({ username })
+
+    if (!settings) {
+      throw new AppError('User does not exist')
+    }
+
+    return settings
+  }
 }

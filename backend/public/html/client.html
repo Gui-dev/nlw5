@@ -11,6 +11,7 @@
     />
     <title></title>
     <link rel="stylesheet" href="/css/styles.css" />
+    
   </head>
   <body>
     <div class="chat chat_support" id="chat_in_support">
@@ -102,14 +103,14 @@
     const chat = document.getElementById("chat_help");
 
     function onLoad() {
-      // fetch("http://localhost:3333/settings/admin").then((result) =>
-      //   result.json().then((response) => {
-      //     const buttonSupport = document.getElementById("btn_support");
-      //     if (!response.chat) {
-      //       buttonSupport.style.display = "none";
-      //     }
-      //   })
-      // );
+      fetch("http://localhost:3333/settings/admin").then((result) =>
+        result.json().then((response) => {
+          const buttonSupport = document.getElementById("btn_support");
+          if (!response.chat) {
+            buttonSupport.style.display = "none";
+          }
+        })
+      );
     }
 
     function openChat() {
@@ -126,7 +127,6 @@
       charac_remaining.innerHTML = Number(250) - Number(length_text);
     }
   </script>
-
   <script src="/socket.io/socket.io.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.4/dayjs.min.js"></script>
   <script src="https://unpkg.com/mustache@latest"></script>

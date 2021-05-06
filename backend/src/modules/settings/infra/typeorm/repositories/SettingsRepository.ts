@@ -34,4 +34,12 @@ export class SettingsRepository implements ISettingsRepository {
 
     return settings
   }
+
+  public async update (username: string, chat: boolean): Promise<void> {
+    await this.settingsRepository.createQueryBuilder()
+      .update(Setting)
+      .set({ chat })
+      .where('username = :username', { username })
+      .execute()
+  }
 }

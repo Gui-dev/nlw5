@@ -1,8 +1,9 @@
-import { App } from '@shared/infra/http/App'
+import { http } from '@shared/infra/http/Http'
 
-const app = new App().http
+import '@shared/infra/websockets/ClientService'
+
 const port = process.env.PORT || 3333
 
-app.listen(port, () => {
+http.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`)
 })

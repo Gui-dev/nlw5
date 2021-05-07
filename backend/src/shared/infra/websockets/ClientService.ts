@@ -46,5 +46,9 @@ io.on('connect', (socket: Socket) => {
       user_id: userExists.id,
       text
     })
+
+    const allMessages = await messagesRepository.listByUser(userExists.id)
+
+    socket.emit('client_list_all_messages', allMessages)
   })
 })

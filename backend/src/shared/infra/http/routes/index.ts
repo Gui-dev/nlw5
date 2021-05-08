@@ -9,6 +9,9 @@ const routes = Router()
 routes.get('/pages/client', (req, res) => {
   return res.render('html/client.html')
 })
+routes.get('/pages/admin', (req, res) => {
+  return res.render('html/admin.html')
+})
 routes.use('/settings', settingsRoutes)
 routes.use('/users', usersRoutes)
 routes.use('/messages', messagesRoutes)

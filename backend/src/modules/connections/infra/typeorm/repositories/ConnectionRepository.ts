@@ -28,4 +28,13 @@ export class ConnectionRepository implements IConnectionRepository {
 
     return connection
   }
+
+  public async findAllWithoutAdmin (): Promise<Connection[]> {
+    const connections = await this.connectionRepository.find({
+      where: { admin_id: null },
+      relations: ['user']
+    })
+
+    return connections
+  }
 }

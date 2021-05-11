@@ -5,4 +5,5 @@ export interface IConnectionRepository {
   create (data: IConnectionRepositoryDTO): Promise<Connection>
   findByUserId (user_id: string): Promise<Connection>
   findAllWithoutAdmin (): Promise<Connection[]>
+  findBySocketId (socket_id: string): Promise<Connection>
 }

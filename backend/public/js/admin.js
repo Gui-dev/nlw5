@@ -64,7 +64,7 @@ const call = (id) => {
 }
 
 const sendMessage = (id) => {
-  const text = document.querySelector(`#send_message${id}`)
+  const text = document.querySelector(`#send_message_${id}`)
 
   const params = {
     text: text.value,

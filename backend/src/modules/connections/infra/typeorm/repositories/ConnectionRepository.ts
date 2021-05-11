@@ -37,4 +37,10 @@ export class ConnectionRepository implements IConnectionRepository {
 
     return connections
   }
+
+  public async findBySocketId (socket_id: string): Promise<Connection> {
+    const connection = this.connectionRepository.findOne({ socket_id })
+
+    return connection
+  }
 }

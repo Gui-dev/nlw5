@@ -22,3 +22,4 @@
 `POST /messages`
 `GET /messages/:user_id`
 `GET '/pages/client'`
+`GET '/pages/admin'` 

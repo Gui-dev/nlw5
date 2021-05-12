@@ -6,4 +6,5 @@ export interface IConnectionRepository {
   findByUserId (user_id: string): Promise<Connection>
   findAllWithoutAdmin (): Promise<Connection[]>
   findBySocketId (socket_id: string): Promise<Connection>
+  updateAdminId (user_id: string, admin_id: string): Promise<void>
 }

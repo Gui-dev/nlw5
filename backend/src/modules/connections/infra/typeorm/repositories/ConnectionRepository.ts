@@ -43,4 +43,13 @@ export class ConnectionRepository implements IConnectionRepository {
 
     return connection
   }
+
+  public async updateAdminId (user_id: string, admin_id: string): Promise<void> {
+    await this.connectionRepository
+      .createQueryBuilder()
+      .update(Connection)
+      .set({ admin_id })
+      .where('user_id = :user_id', { user_id })
+      .execute()
+  }
 }

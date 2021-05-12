@@ -7,7 +7,7 @@ import { MessagesRepository } from '@modules/messages/infra/typeorm/repositories
 
 interface IParams {
   text: string
-  email: string
+  email?: string
   socket_admin_id?: string
 }
 
@@ -51,6 +51,9 @@ io.on('connect', (socket: Socket) => {
     const allMessages = await messagesRepository.listByUser(userExists.id)
 
     socket.emit('client_list_all_messages', allMessages)
+
+    const allUsers = await connectionRepository.findAllWithoutAdmin()
+    io.emit('admin_list_all_users', allUsers)
   })
 
   socket.on('client_send_to_admin', async (params: IParams) => {

@@ -2,15 +2,14 @@
 
 Podcastr is a platform built for podcast broadcasting.
 
-
 ## Technologies used
-  - NextJS
-  - Typescript
-  - Styled Components
+  - [NextJS](https://nextjs.org)
+  - [Typescript](https://www.typescriptlang.org)
+  - [Styled Components](https://www.styled-components.com)
 
 ## Requirements
 
-You need to install both Node.js and Yarn or npm to run this project.
+You need to install both [Node.js](https://nodejs.org) and [Yarn](https://yarnpkg.com) or npm to run this project.
 
 ## How to use it
 
@@ -21,5 +20,6 @@ You need to install both Node.js and Yarn or npm to run this project.
   $ yarn server
   # Run the web server
   $ yarn dev
+```
 
-The app will be available for access on your browser at http://localhost:3000
+The app will be available for access on your browser at (http://localhost:3000)

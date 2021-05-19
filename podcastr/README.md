@@ -2,6 +2,11 @@
 
 Podcastr is a platform built for podcast broadcasting.
 
+# Screens
+
+[Home](https://github.com/Gui-dev/nlw5/blob/main/podcastr/screens/home_screen.png?raw=true)
+[Episode](https://github.com/Gui-dev/nlw5/blob/main/podcastr/screens/episode_screen.png?raw=true)
+
 ## Technologies used
   - [NextJS](https://nextjs.org)
   - [Typescript](https://www.typescriptlang.org)

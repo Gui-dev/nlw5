@@ -2,8 +2,24 @@ import styled from 'styled-components'
 
 export const Container = styled.article`
   max-width: 70rem;
+  height: calc(100vh - 10.4rem);
   padding: 3rem 2rem;
   margin: 0 auto;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: .4rem;               /* width of the entire scrollbar */
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: var(--gray-200);        /* color of the tracking area */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--purple-300);    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: 1px solid var(--purple-800);  /* creates padding around scroll thumb */
+  }
 `
 
 export const ThumbnailContainer = styled.div`

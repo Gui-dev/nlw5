@@ -3,7 +3,21 @@ import styled from 'styled-components'
 export const Container = styled.div`
   padding: 0 4rem;
   height: calc(100vh - 10.4rem);
-  overflow-y: scroll;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: .4rem;               /* width of the entire scrollbar */
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: var(--gray-200);        /* color of the tracking area */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--purple-300);    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: 1px solid var(--purple-800);  /* creates padding around scroll thumb */
+  }
 
   h2 {
     margin-top: 3rem;

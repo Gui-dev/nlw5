@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import 'rc-slider/assets/index.css'
 
 export const Container = styled.div`
   display: flex;
@@ -23,7 +24,7 @@ export const Container = styled.div`
     font-weight: 600;
   }
 
-  > div {
+  .emptyPlayer {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -35,17 +36,40 @@ export const Container = styled.div`
     border: 1.5px dashed var(--purple-300);
     border-radius: 1.5rem;
   }
+`
 
-  footer {
-    align-self: stretch;
+export const CurrentEpisode = styled.div`
+  text-align: center;
 
-    &.empty {
-      opacity: 0.5;
-    }
+  img {
+    border-radius: 1.5rem;
+  }
+
+  strong {
+    display: block;
+    font-size: 1.4rem;
+    font-family: Lexend, sans-serif;
+    line-height: 1.75rem;
+    color: var(--white);
+    margin-top: -3rem;
+  }
+
+  p {
+    display: block;
+    font-size: 1.2rem;
+    line-height: 1.5rem;
+    margin-top: 1rem;
+    opacity: 0.6;
   }
 `
 
 export const Footer = styled.footer`
+  align-self: stretch;
+
+  &.empty {
+    opacity: 0.5;
+  }
+
   > div {
     display: flex;
     align-items: center;
@@ -82,12 +106,25 @@ export const Buttons = styled.div`
     font-size: 0;
     background: transparent;
     border: 0;
+    transition: filter 0.2s;
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+
+    &:hover:not(:disabled) {
+      filter: brightness(0.8);
+    }
 
     &.playButton {
       width: 4rem;
       height: 4rem;
       background-color: var(--purple-400);
       border-radius: 1rem;
+
+      &:hover {
+        filter: brightness(0.95);
+      }
     }
   }
 `

@@ -6,7 +6,7 @@ import { usePlayer } from '../../context/PlayerContext'
 import { Container, CurrentEpisode, Footer, Buttons } from './style'
 
 export const Player = () => {
-  const { episodeList, currentEpisodeIndex, isPlaying, togglePlay } = usePlayer()
+  const { episodeList, currentEpisodeIndex, isPlaying, togglePlay, setPlayingState } = usePlayer()
   const episode = episodeList[currentEpisodeIndex]
   const audioRef = useRef<HTMLAudioElement>(null)
 
@@ -72,6 +72,8 @@ export const Player = () => {
             src={ episode.url }
             ref={ audioRef }
             autoPlay
+            onPlay={ () => setPlayingState(true) }
+            onPause={ () => setPlayingState(false) }
           />
         ) }
 

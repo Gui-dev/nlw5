@@ -7,6 +7,7 @@ import ptBR from 'date-fns/locale/pt-BR'
 
 import { convertDurationToTimeString } from '../utils/convertDurationToTimeString'
 import { api } from './../services/api'
+import { usePlayer } from '../context/PlayerContext'
 import { Container, LatestEpisodes, AllEpisodes } from '../style/home'
 
 export interface IEpisodes {
@@ -27,6 +28,7 @@ export interface IHomeProps {
 }
 
 export default function Home ({ latestEpisodes, allEpisodes }: IHomeProps) {
+  const { play } = usePlayer()
   return (
     <>
       <Head>
@@ -57,7 +59,7 @@ export default function Home ({ latestEpisodes, allEpisodes }: IHomeProps) {
                     <span>{ episode.durationAsString }</span>
                   </div>
 
-                  <button>
+                  <button onClick={ () => play(episode) }>
                     <img src="/play-green.svg" alt="Ouvir episódio" title="Ouvir episódio"/>
                   </button>
                 </li>
@@ -103,7 +105,7 @@ export default function Home ({ latestEpisodes, allEpisodes }: IHomeProps) {
                     <td style={{ width: 100 }}>{ episode.publishedAt }</td>
                     <td>{ episode.durationAsString }</td>
                     <td>
-                      <button>
+                      <button onClick={ () => play(episode) }>
                         <img src="/play-green.svg" alt="Tocar episódio" title="Tocar episódio"/>
                       </button>
                     </td>

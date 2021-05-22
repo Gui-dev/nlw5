@@ -15,11 +15,13 @@ interface IPlayerContextProps {
   isPlaying: boolean
   hasPrevious: boolean
   hasNext: boolean
+  isLooping: boolean
   play: (episode: IEpisode) => void
   playList: (episodesList: IEpisode[], index: number) => void
   playNext: () => void
   playPrevious: () => void
   togglePlay: () => void
+  toggleLoop: () => void
   setPlayingState: (state: boolean) => void
 }
 
@@ -29,6 +31,7 @@ export const PlayerProvider: FC = ({ children }) => {
   const [episodeList, setEpisodeList] = useState<IEpisode[]>([])
   const [currentEpisodeIndex, setCurrentEpisodeIndex] = useState(0)
   const [isPlaying, setIsPlaying] = useState(false)
+  const [isLooping, setIsLooping] = useState(false)
   const hasPrevious = currentEpisodeIndex > 0
   const hasNext = (currentEpisodeIndex + 1) < episodeList.length
 
@@ -61,6 +64,10 @@ export const PlayerProvider: FC = ({ children }) => {
     setIsPlaying(!isPlaying)
   }
 
+  const toggleLoop = () => {
+    setIsLooping(!isLooping)
+  }
+
   const setPlayingState = (state: boolean) => {
     setIsPlaying(state)
   }
@@ -72,11 +79,13 @@ export const PlayerProvider: FC = ({ children }) => {
       isPlaying,
       hasPrevious,
       hasNext,
+      isLooping,
       play,
       playList,
       playNext,
       playPrevious,
       togglePlay,
+      toggleLoop,
       setPlayingState
     }}
     >

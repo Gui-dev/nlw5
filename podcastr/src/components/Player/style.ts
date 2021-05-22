@@ -108,6 +108,14 @@ export const Buttons = styled.div`
     border: 0;
     transition: filter 0.2s;
 
+    &.isActive {
+      filter: invert(0.35) sepia(1) saturate(3) hue-rotate(100deg);
+    }
+
+    &.isActive:hover {
+      filter: brightness(0.6) invert(0.35) sepia(1) saturate(3) hue-rotate(100deg);
+    }
+
     &:disabled {
       cursor: not-allowed;
       opacity: 0.5;

@@ -7,6 +7,7 @@ import ptBR from 'date-fns/locale/pt-BR'
 
 import { api } from '../../services/api'
 import { convertDurationToTimeString } from '../../utils/convertDurationToTimeString'
+import { usePlayer } from '../../context/PlayerContext'
 import { Container, ThumbnailContainer, Header, Description } from './style'
 
 interface IContextParams extends ParsedUrlQuery {
@@ -30,6 +31,8 @@ interface IEpisodeProps {
 }
 
 const Episode = ({ episode }: IEpisodeProps) => {
+  const { play } = usePlayer()
+
   return (
     <Container>
       <ThumbnailContainer>
@@ -46,7 +49,7 @@ const Episode = ({ episode }: IEpisodeProps) => {
           objectFit="cover"
         />
 
-        <button>
+        <button onClick={ () => play(episode) }>
           <img src="/play.svg" alt="Tocar episódio" title="Tocar" />
         </button>
       </ThumbnailContainer>

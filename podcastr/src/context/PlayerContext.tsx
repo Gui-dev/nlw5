@@ -13,6 +13,8 @@ interface IPlayerContextProps {
   episodeList: Array<IEpisode>
   currentEpisodeIndex: number
   isPlaying: boolean
+  hasPrevious: boolean
+  hasNext: boolean
   play: (episode: IEpisode) => void
   playList: (episodesList: IEpisode[], index: number) => void
   playNext: () => void
@@ -27,6 +29,8 @@ export const PlayerProvider: FC = ({ children }) => {
   const [episodeList, setEpisodeList] = useState<IEpisode[]>([])
   const [currentEpisodeIndex, setCurrentEpisodeIndex] = useState(0)
   const [isPlaying, setIsPlaying] = useState(false)
+  const hasPrevious = currentEpisodeIndex > 0
+  const hasNext = (currentEpisodeIndex + 1) < episodeList.length
 
   const play = (episode: IEpisode) => {
     console.log('Clicou')
@@ -42,15 +46,13 @@ export const PlayerProvider: FC = ({ children }) => {
   }
 
   const playNext = () => {
-    const nextEpisodeIndex = currentEpisodeIndex + 1
-
-    if (nextEpisodeIndex >= episodeList.length) return
-
-    setCurrentEpisodeIndex(currentEpisodeIndex + 1)
+    if (hasNext) {
+      setCurrentEpisodeIndex(currentEpisodeIndex + 1)
+    }
   }
 
   const playPrevious = () => {
-    if (currentEpisodeIndex > 0) {
+    if (hasPrevious) {
       setCurrentEpisodeIndex(currentEpisodeIndex - 1)
     }
   }
@@ -68,6 +70,8 @@ export const PlayerProvider: FC = ({ children }) => {
       episodeList,
       currentEpisodeIndex,
       isPlaying,
+      hasPrevious,
+      hasNext,
       play,
       playList,
       playNext,

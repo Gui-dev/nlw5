@@ -10,6 +10,8 @@ export const Player = () => {
     episodeList,
     currentEpisodeIndex,
     isPlaying,
+    hasPrevious,
+    hasNext,
     playNext,
     playPrevious,
     togglePlay,
@@ -89,7 +91,7 @@ export const Player = () => {
           <button disabled={ !episode }>
             <img src="/shuffle.svg" alt="Ordem aleátoria" title="Ordem aleátoria"/>
           </button>
-          <button disabled={ !episode } onClick={ playPrevious }>
+          <button disabled={ !episode || !hasPrevious } onClick={ playPrevious }>
             <img src="/play-previous.svg" alt="Tocar anterior" title="Tocar anterior"/>
           </button>
           <button
@@ -102,7 +104,7 @@ export const Player = () => {
               : <img src="/play.svg" alt="Tocar episódio" title="Tocar episódio"/>
             }
           </button>
-          <button disabled={ !episode } onClick={ playNext }>
+          <button disabled={ !episode || !hasNext } onClick={ playNext }>
             <img src="/play-next.svg" alt="Tocar próxima" title="Tocar próxima"/>
           </button>
           <button disabled={ !episode }>

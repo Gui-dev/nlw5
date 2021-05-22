@@ -6,7 +6,15 @@ import { usePlayer } from '../../context/PlayerContext'
 import { Container, CurrentEpisode, Footer, Buttons } from './style'
 
 export const Player = () => {
-  const { episodeList, currentEpisodeIndex, isPlaying, togglePlay, setPlayingState } = usePlayer()
+  const {
+    episodeList,
+    currentEpisodeIndex,
+    isPlaying,
+    playNext,
+    playPrevious,
+    togglePlay,
+    setPlayingState
+  } = usePlayer()
   const episode = episodeList[currentEpisodeIndex]
   const audioRef = useRef<HTMLAudioElement>(null)
 
@@ -81,7 +89,7 @@ export const Player = () => {
           <button disabled={ !episode }>
             <img src="/shuffle.svg" alt="Ordem aleátoria" title="Ordem aleátoria"/>
           </button>
-          <button disabled={ !episode }>
+          <button disabled={ !episode } onClick={ playPrevious }>
             <img src="/play-previous.svg" alt="Tocar anterior" title="Tocar anterior"/>
           </button>
           <button
@@ -94,7 +102,7 @@ export const Player = () => {
               : <img src="/play.svg" alt="Tocar episódio" title="Tocar episódio"/>
             }
           </button>
-          <button disabled={ !episode }>
+          <button disabled={ !episode } onClick={ playNext }>
             <img src="/play-next.svg" alt="Tocar próxima" title="Tocar próxima"/>
           </button>
           <button disabled={ !episode }>

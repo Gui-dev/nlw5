@@ -16,6 +16,7 @@ interface IPlayerContextProps {
   play: (episode: IEpisode) => void
   togglePlay: () => void
   setPlayingState: (state: boolean) => void
+  playList: (episodesList: IEpisode[], index: number) => void
 }
 
 export const PlayerContext = createContext({} as IPlayerContextProps)
@@ -29,6 +30,12 @@ export const PlayerProvider: FC = ({ children }) => {
     console.log('Clicou')
     setEpisodeList([episode])
     setCurrentEpisodeIndex(0)
+    setIsPlaying(true)
+  }
+
+  const playList = (episodesList: IEpisode[], index: number) => {
+    setEpisodeList(episodesList)
+    setCurrentEpisodeIndex(index)
     setIsPlaying(true)
   }
 
@@ -46,6 +53,7 @@ export const PlayerProvider: FC = ({ children }) => {
       currentEpisodeIndex,
       isPlaying,
       play,
+      playList,
       togglePlay,
       setPlayingState
     }}

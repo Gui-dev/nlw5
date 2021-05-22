@@ -28,7 +28,9 @@ export interface IHomeProps {
 }
 
 export default function Home ({ latestEpisodes, allEpisodes }: IHomeProps) {
-  const { play } = usePlayer()
+  const { playList } = usePlayer()
+  const episodesList = [...latestEpisodes, ...allEpisodes]
+
   return (
     <>
       <Head>
@@ -38,7 +40,7 @@ export default function Home ({ latestEpisodes, allEpisodes }: IHomeProps) {
         <LatestEpisodes>
           <h2>Últimos lançamentos</h2>
           <ul>
-            { latestEpisodes.map(episode => {
+            { latestEpisodes.map((episode, index) => {
               return (
                 <li key={ String(episode.id) }>
                   <Image
@@ -59,7 +61,7 @@ export default function Home ({ latestEpisodes, allEpisodes }: IHomeProps) {
                     <span>{ episode.durationAsString }</span>
                   </div>
 
-                  <button onClick={ () => play(episode) }>
+                  <button onClick={ () => playList(episodesList, index) }>
                     <img src="/play-green.svg" alt="Ouvir episódio" title="Ouvir episódio"/>
                   </button>
                 </li>
@@ -83,7 +85,7 @@ export default function Home ({ latestEpisodes, allEpisodes }: IHomeProps) {
               </tr>
             </thead>
             <tbody>
-              { allEpisodes.map(episode => {
+              { allEpisodes.map((episode, index) => {
                 return (
                   <tr key={ String(episode.id) }>
                     <td style={{ width: 72 }}>
@@ -105,7 +107,7 @@ export default function Home ({ latestEpisodes, allEpisodes }: IHomeProps) {
                     <td style={{ width: 100 }}>{ episode.publishedAt }</td>
                     <td>{ episode.durationAsString }</td>
                     <td>
-                      <button onClick={ () => play(episode) }>
+                      <button onClick={ () => playList(episodesList, index + latestEpisodes.length) }>
                         <img src="/play-green.svg" alt="Tocar episódio" title="Tocar episódio"/>
                       </button>
                     </td>

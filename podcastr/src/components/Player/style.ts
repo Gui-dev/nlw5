@@ -110,6 +110,7 @@ export const Buttons = styled.div`
 
     &:disabled {
       cursor: not-allowed;
+      opacity: 0.5;
     }
 
     &:hover:not(:disabled) {

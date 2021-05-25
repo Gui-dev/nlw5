@@ -37,12 +37,15 @@ export const Player = () => {
   }, [isPlaying])
 
   const setupProgressListener = () => {
-    let audio = audioRef.current?.currentTime
-    audio = 0
-    setProgress(audio)
+    audioRef.current.currentTime = 0
     audioRef.current?.addEventListener('timeupdate', () => {
       setProgress(Math.floor(Number(audioRef.current?.currentTime)))
     })
+  }
+
+  const handleSeek = (amount: number) => {
+    audioRef.current.currentTime = amount
+    setProgress(amount)
   }
 
   return (
@@ -84,6 +87,7 @@ export const Player = () => {
                     handleStyle={{ borderColor: '#84D361', borderWidth: 4 }}
                     max={ episode.duration }
                     value={ progress }
+                    onChange={ handleSeek }
                   />
                 )
               : (

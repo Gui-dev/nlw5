@@ -13,10 +13,12 @@ export const Player = () => {
     hasPrevious,
     hasNext,
     isLooping,
+    isShuffling,
     playNext,
     playPrevious,
     togglePlay,
     toggleLoop,
+    toggleShuffle,
     setPlayingState
   } = usePlayer()
   const episode = episodeList[currentEpisodeIndex]
@@ -91,7 +93,11 @@ export const Player = () => {
         ) }
 
         <Buttons>
-          <button disabled={ !episode }>
+          <button
+            className={ isShuffling ? 'isActive' : '' }
+            disabled={ !episode || episodeList.length === 1 }
+            onClick={ toggleShuffle }
+          >
             <img src="/shuffle.svg" alt="Ordem aleátoria" title="Ordem aleátoria"/>
           </button>
           <button disabled={ !episode || !hasPrevious } onClick={ playPrevious }>

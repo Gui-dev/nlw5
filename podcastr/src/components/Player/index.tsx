@@ -1,8 +1,9 @@
 import Image from 'next/image'
 import Slider from 'rc-slider'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import { usePlayer } from '../../context/PlayerContext'
+import { convertDurationToTimeString } from '../../utils/convertDurationToTimeString'
 import { Container, CurrentEpisode, Footer, Buttons } from './style'
 
 export const Player = () => {
@@ -23,6 +24,7 @@ export const Player = () => {
   } = usePlayer()
   const episode = episodeList[currentEpisodeIndex]
   const audioRef = useRef<HTMLAudioElement>(null)
+  const [progress, setProgress] = useState(0)
 
   useEffect(() => {
     if (!audioRef.current) return
@@ -33,6 +35,15 @@ export const Player = () => {
       audioRef.current.pause()
     }
   }, [isPlaying])
+
+  const setupProgressListener = () => {
+    let audio = audioRef.current?.currentTime
+    audio = 0
+    setProgress(audio)
+    audioRef.current?.addEventListener('timeupdate', () => {
+      setProgress(Math.floor(Number(audioRef.current?.currentTime)))
+    })
+  }
 
   return (
     <Container>
@@ -63,7 +74,7 @@ export const Player = () => {
 
       <Footer className={ !episode ? 'empty' : '' }>
         <div>
-          <span>00:00</span>
+          <span>{ convertDurationToTimeString(progress) }</span>
           <div className="slider">
             { episode
               ? (
@@ -71,6 +82,8 @@ export const Player = () => {
                     trackStyle={{ backgroundColor: '#84D361' }}
                     railStyle={{ backgroundColor: '#9F75FF' }}
                     handleStyle={{ borderColor: '#84D361', borderWidth: 4 }}
+                    max={ episode.duration }
+                    value={ progress }
                   />
                 )
               : (
@@ -78,7 +91,7 @@ export const Player = () => {
                 )
             }
           </div>
-          <span>00:00</span>
+          <span>{ convertDurationToTimeString(episode?.duration ?? 0) }</span>
         </div>
 
         { episode && (
@@ -89,6 +102,7 @@ export const Player = () => {
             loop={ isLooping }
             onPlay={ () => setPlayingState(true) }
             onPause={ () => setPlayingState(false) }
+            onLoadedMetadata={ setupProgressListener }
           />
         ) }
 

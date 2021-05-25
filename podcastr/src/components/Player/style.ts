@@ -73,8 +73,8 @@ export const Footer = styled.footer`
   > div {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    font-size: 1.4rem;
+    gap: 1.5rem;
+    font-size: 1.1rem;
 
     span {
       display: inline-block;

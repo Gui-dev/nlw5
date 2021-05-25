@@ -16,12 +16,14 @@ interface IPlayerContextProps {
   hasPrevious: boolean
   hasNext: boolean
   isLooping: boolean
+  isShuffling: boolean
   play: (episode: IEpisode) => void
   playList: (episodesList: IEpisode[], index: number) => void
   playNext: () => void
   playPrevious: () => void
   togglePlay: () => void
   toggleLoop: () => void
+  toggleShuffle: () => void
   setPlayingState: (state: boolean) => void
 }
 
@@ -32,11 +34,11 @@ export const PlayerProvider: FC = ({ children }) => {
   const [currentEpisodeIndex, setCurrentEpisodeIndex] = useState(0)
   const [isPlaying, setIsPlaying] = useState(false)
   const [isLooping, setIsLooping] = useState(false)
+  const [isShuffling, setIsShuffling] = useState(false)
   const hasPrevious = currentEpisodeIndex > 0
   const hasNext = (currentEpisodeIndex + 1) < episodeList.length
 
   const play = (episode: IEpisode) => {
-    console.log('Clicou')
     setEpisodeList([episode])
     setCurrentEpisodeIndex(0)
     setIsPlaying(true)
@@ -68,6 +70,10 @@ export const PlayerProvider: FC = ({ children }) => {
     setIsLooping(!isLooping)
   }
 
+  const toggleShuffle = () => {
+    setIsShuffling(!isShuffling)
+  }
+
   const setPlayingState = (state: boolean) => {
     setIsPlaying(state)
   }
@@ -80,12 +86,14 @@ export const PlayerProvider: FC = ({ children }) => {
       hasPrevious,
       hasNext,
       isLooping,
+      isShuffling,
       play,
       playList,
       playNext,
       playPrevious,
       togglePlay,
       toggleLoop,
+      toggleShuffle,
       setPlayingState
     }}
     >

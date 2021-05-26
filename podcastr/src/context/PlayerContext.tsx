@@ -25,6 +25,7 @@ interface IPlayerContextProps {
   toggleLoop: () => void
   toggleShuffle: () => void
   setPlayingState: (state: boolean) => void
+  clearPlayerState: () => void
 }
 
 export const PlayerContext = createContext({} as IPlayerContextProps)
@@ -36,7 +37,7 @@ export const PlayerProvider: FC = ({ children }) => {
   const [isLooping, setIsLooping] = useState(false)
   const [isShuffling, setIsShuffling] = useState(false)
   const hasPrevious = currentEpisodeIndex > 0
-  const hasNext = (currentEpisodeIndex + 1) < episodeList.length
+  const hasNext = isShuffling || (currentEpisodeIndex + 1) < episodeList.length
 
   const play = (episode: IEpisode) => {
     setEpisodeList([episode])
@@ -81,6 +82,11 @@ export const PlayerProvider: FC = ({ children }) => {
     setIsPlaying(state)
   }
 
+  const clearPlayerState = () => {
+    setEpisodeList([])
+    setCurrentEpisodeIndex(0)
+  }
+
   return (
     <PlayerContext.Provider value={{
       episodeList,
@@ -97,7 +103,8 @@ export const PlayerProvider: FC = ({ children }) => {
       togglePlay,
       toggleLoop,
       toggleShuffle,
-      setPlayingState
+      setPlayingState,
+      clearPlayerState
     }}
     >
       { children }

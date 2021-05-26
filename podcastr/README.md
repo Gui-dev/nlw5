@@ -6,6 +6,7 @@ Podcastr is a platform built for podcast broadcasting.
 
 ![Home](./screens/home_screen.png)
 ![Episode](./screens/episode_screen.png)
+![Episode Play](./screens/podcastr_play.png)
 
 ## Technologies used
   - [NextJS](https://nextjs.org)

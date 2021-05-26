@@ -1,4 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
+import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ParsedUrlQuery } from 'querystring'
@@ -35,6 +36,9 @@ const Episode = ({ episode }: IEpisodeProps) => {
 
   return (
     <Container>
+      <Head>
+        <title>Podcastr - { episode.title }</title>
+      </Head>
       <ThumbnailContainer>
         <Link href="/">
           <button>

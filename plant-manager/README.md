@@ -1,11 +1,11 @@
-<!-- <h1 align="center">
+<h1 align="center">
    <img
         alt="PlantManager"
         title="PlantManager"
-        src=".github/logo.svg"
+        src="./assets/adaptive-icon.png"
         width="300"
     />
-</h1> -->
+</h1>
 
 # PlantManager
 
@@ -34,7 +34,7 @@ You need to install both [Node.js](https://nodejs.org) and [Yarn](https://yarnpk
   $ yarn install
   # Run the backend fake server
   $ yarn server
-  # Run the web server
+  # Run app
   $ expo start
 ```
 

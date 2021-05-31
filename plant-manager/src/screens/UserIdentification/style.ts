@@ -3,6 +3,11 @@ import styled from 'styled-components/native'
 import fonts from './../../styles/fonts'
 import colors from './../../styles/colors'
 
+interface IInputProps {
+  isFocused: boolean
+  isFilled: boolean
+}
+
 export const Container = styled.SafeAreaView`
   flex: 1;
   align-items: center;
@@ -49,7 +54,7 @@ export const Title = styled.Text`
   color: ${colors.heading};
 `
 
-export const Input = styled.TextInput`
+export const Input = styled.TextInput<IInputProps>`
   font-size: 18px;
   text-align: center;
   color: ${colors.heading};
@@ -58,5 +63,5 @@ export const Input = styled.TextInput`
   margin-bottom: 50px;
   padding: 10px;
   border-bottom-width: 1px;
-  border-bottom-color: ${colors.gray};
+  border-bottom-color: ${({ isFocused, isFilled }) => isFocused || isFilled ? colors.heading : colors.gray};
 `

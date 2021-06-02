@@ -1,9 +1,16 @@
 import React from 'react'
-import { Button } from '../../components/Button'
+import { useNavigation } from '@react-navigation/core'
 
+import { Button } from '../../components/Button'
 import { Container, Content, Emoji, Title, SubTitle, Footer } from './style'
 
 export const Confirmation: React.FC = () => {
+  const { navigate } = useNavigation()
+
+  const handleNavigationToPlantSelect = () => {
+    navigate('PlantSelect')
+  }
+
   return (
     <Container>
       <Content>
@@ -12,7 +19,10 @@ export const Confirmation: React.FC = () => {
         <SubTitle>Agora vamos começar a cuidar das suas plantinhas com muito cuidado</SubTitle>
 
         <Footer>
-          <Button title="Próximo"/>
+          <Button
+            title="Começar"
+            onPress={ handleNavigationToPlantSelect }
+          />
         </Footer>
       </Content>
     </Container>

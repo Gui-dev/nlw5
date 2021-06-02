@@ -7,9 +7,10 @@ interface IButtonProps extends TouchableOpacityProps {
   title?: string
 }
 
-export const Button = ({ title }: IButtonProps) => {
+export const Button = ({ title, ...rest }: IButtonProps) => {
   return (
-    <Container>
+    // @ts-ignore
+    <Container {...rest}>
       <ButtonText>
         { title }
       </ButtonText>

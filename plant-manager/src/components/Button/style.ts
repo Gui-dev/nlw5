@@ -1,11 +1,14 @@
 import styled from 'styled-components/native'
+import { TouchableOpacityProps } from 'react-native'
 
 import colors from './../../styles/colors'
 import fonts from './../../styles/fonts'
 
+interface IContainerProps extends TouchableOpacityProps{}
+
 export const Container = styled.TouchableOpacity.attrs({
   activeOpacity: 0.8
-})`
+})<IContainerProps>`
   align-items: center;
   justify-content: center;
   width: 100%;

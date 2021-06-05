@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
-import { Keyboard, Platform, TouchableWithoutFeedback } from 'react-native'
+import { Alert, Keyboard, Platform, TouchableWithoutFeedback } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import { Button } from '../../components/Button'
 import { Container, Wrapper, Content, Form, Header, Title, Emoji, Input } from './style'
@@ -25,7 +26,11 @@ export const UserIdentification: React.FC = () => {
     setName(value)
   }
 
-  const handleNavigationToConfirmation = () => {
+  const handleNavigationToConfirmation = async () => {
+    if (!name) {
+      return Alert.alert('Oooops, desculpe', 'Me diz como chamar você 😥')
+    }
+    await AsyncStorage.setItem('@plantmanager:user', name)
     navigate('Confirmation')
   }
 

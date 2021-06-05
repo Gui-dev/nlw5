@@ -104,6 +104,7 @@ export const PlantSelect: React.FC = () => {
       <ButtonContainer>
         <ButtonList
           data={environments}
+          keyExtractor={(item: any) => String(item.key)}
           renderItem={({ item: environment }: any) => {
             return (
               <EnvironmentButton
@@ -120,6 +121,7 @@ export const PlantSelect: React.FC = () => {
       <PlantsContainer>
         <PlantsList
           data={filteredPlants}
+          keyExtractor={(item: any) => String(item.id)}
           renderItem={({ item: plant }: any) => {
             return (
               <PlantCardPrimary

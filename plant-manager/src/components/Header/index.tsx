@@ -21,8 +21,6 @@ export const Header: React.FC = () => {
     loadUser()
   }, [username])
 
-  console.log(username)
-
   return (
     <Container>
       <Info>

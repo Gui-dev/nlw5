@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigation } from '@react-navigation/native'
 import { ActivityIndicator } from 'react-native'
 
 import { Header } from '../../components/Header'
@@ -25,6 +26,7 @@ interface IPlantsListProps {
 }
 
 export const PlantSelect: React.FC = () => {
+  const { navigate } = useNavigation()
   const [environments, setEnvironments] = useState<IEnvironmentsProps[]>([])
   const [plantsList, setPlantsList] = useState<IPlantsListProps[]>([])
   const [filteredPlants, setFilteredPlants] = useState<IPlantsListProps[]>([])
@@ -86,6 +88,10 @@ export const PlantSelect: React.FC = () => {
     setFilteredPlants(filtered)
   }
 
+  const handleNavigationToPlantSave = (plant: IPlantsListProps) => {
+    navigate('PlantSave', plant)
+  }
+
   if (loading) {
     return (
       <Load />
@@ -126,6 +132,7 @@ export const PlantSelect: React.FC = () => {
               <PlantCardPrimary
                 key={String(plant.id)}
                 data={{ name: plant.name, photo: plant.photo }}
+                onPress={ () => handleNavigationToPlantSave(plant) }
               />
             )
           }}

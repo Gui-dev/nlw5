@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { format } from 'date-fns'
 
 interface IPlantSaveProps {
   id: number
@@ -14,7 +15,7 @@ interface IPlantSaveProps {
   dateTimeNotification: Date
 }
 
-interface ISavePlantsProps {
+interface IStoragePlantsProps {
   [id: string]: {
     data: IPlantSaveProps
   }
@@ -23,7 +24,7 @@ interface ISavePlantsProps {
 export const savePlant = async (plant: IPlantSaveProps): Promise<void> => {
   try {
     const data = await AsyncStorage.getItem('@plantmanager:plants')
-    const oldPlants = data ? (JSON.parse(data) as ISavePlantsProps) : {}
+    const oldPlants = data ? (JSON.parse(data) as IStoragePlantsProps) : {}
 
     const newPlant = {
       [plant.id]: {
@@ -35,6 +36,30 @@ export const savePlant = async (plant: IPlantSaveProps): Promise<void> => {
       ...newPlant,
       ...oldPlants
     }))
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
+export const loadPlants = async (): Promise<IPlantSaveProps[]> => {
+  try {
+    const data = await AsyncStorage.getItem('@plantmanager:plants')
+    const allPlants = data ? (JSON.parse(data) as IStoragePlantsProps) : {}
+
+    const plantsSorted = Object.keys(allPlants).map(plant => {
+      return {
+        ...allPlants[plant].data,
+        hour: format(new Date(allPlants[plant].data.dateTimeNotification), 'HH:mm')
+      }
+    })
+      .sort((a, b) =>
+        Math.floor(
+          new Date(a.dateTimeNotification).getTime() / 1000 -
+        Math.floor(new Date(b.dateTimeNotification).getTime() / 1000)
+        )
+      )
+
+    return plantsSorted
   } catch (error) {
     throw new Error(error)
   }

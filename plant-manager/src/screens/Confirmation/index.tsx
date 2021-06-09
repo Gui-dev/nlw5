@@ -1,26 +1,41 @@
 import React from 'react'
-import { useNavigation } from '@react-navigation/core'
+import { useNavigation, useRoute } from '@react-navigation/core'
 
 import { Button } from '../../components/Button'
 import { Container, Content, Emoji, Title, SubTitle, Footer } from './style'
 
+interface IConfirmationProps {
+  title: string
+  subtitle: string
+  buttonTitle: string
+  icon: 'smile' | 'hug'
+  nextScreen: string
+}
+
+const emojis = {
+  smile: '😉',
+  hug: '🤗'
+}
+
 export const Confirmation: React.FC = () => {
   const { navigate } = useNavigation()
+  const routes = useRoute()
+  const { title, subtitle, buttonTitle, icon, nextScreen } = routes.params as IConfirmationProps
 
   const handleNavigationToPlantSelect = () => {
-    navigate('PlantSelect')
+    navigate(nextScreen)
   }
 
   return (
     <Container>
       <Content>
-        <Emoji>😉</Emoji>
-        <Title>Prontinho</Title>
-        <SubTitle>Agora vamos começar a cuidar das suas plantinhas com muito cuidado</SubTitle>
+        <Emoji>{ emojis[icon] }</Emoji>
+        <Title>{ title }</Title>
+        <SubTitle>{ subtitle }</SubTitle>
 
         <Footer>
           <Button
-            title="Começar"
+            title={buttonTitle}
             onPress={ handleNavigationToPlantSelect }
           />
         </Footer>

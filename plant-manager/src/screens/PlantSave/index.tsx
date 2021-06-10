@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Alert, Platform } from 'react-native'
 import { SvgFromUri } from 'react-native-svg'
-import { useRoute } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 import DateTimePicker, { Event } from '@react-native-community/datetimepicker'
 import { isBefore, format } from 'date-fns'
 
@@ -25,11 +25,13 @@ interface IPlantSaveProps {
     repeat_every: string
   },
   dateTimeNotification: Date
+  hour: string
 }
 
 export const PlantSave: React.FC = () => {
   const [selectedDateTime, setSelectedDateTime] = useState(new Date())
   const [showDatePicker, setShowDatePicker] = useState(Platform.OS === 'ios')
+  const { navigate } = useNavigation()
   const route = useRoute()
   const plant = route.params as IPlantSaveProps
 
@@ -59,6 +61,13 @@ export const PlantSave: React.FC = () => {
         dateTimeNotification: selectedDateTime
       })
       Alert.alert('Plantinha Salvada com sucesso', 'Sua plantinha está salva 🌱')
+      navigate('Confirmation', {
+        title: 'Tudo certo',
+        subtitle: 'Fique tranquilo que sempre vamos lembrar você de cuidar da sua plantinha com bastante amor',
+        buttonTitle: 'Obrigado :D',
+        icon: 'hug',
+        nextScreen: 'MyPlants'
+      })
     } catch {
       Alert.alert('Ooops, Erro ao Salvar', 'Não foi possível salvar sua planta 🌱')
     }

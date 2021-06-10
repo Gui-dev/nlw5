@@ -13,6 +13,7 @@ interface IPlantSaveProps {
     repeat_every: string
   },
   dateTimeNotification: Date
+  hour: string
 }
 
 interface IStoragePlantsProps {

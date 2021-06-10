@@ -4,9 +4,10 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { Welcome } from './../screens/Welcome'
 import { UserIdentification } from './../screens/UserIdentification'
 import { Confirmation } from './../screens/Confirmation'
-import { PlantSelect } from './../screens/PlantSelect'
 import { PlantSave } from './../screens/PlantSave'
 import { MyPlants } from './../screens/MyPlants'
+
+import { TabRoutes } from './tab.routes'
 
 export const StackRoutes: React.FC = () => {
   const { Navigator, Screen } = createStackNavigator()
@@ -23,7 +24,7 @@ export const StackRoutes: React.FC = () => {
       <Screen name="Welcome" component={ Welcome }/>
       <Screen name="UserIdentification" component={ UserIdentification }/>
       <Screen name="Confirmation" component={ Confirmation }/>
-      <Screen name="PlantSelect" component={ PlantSelect }/>
+      <Screen name="PlantSelect" component={ TabRoutes }/>
       <Screen name="PlantSave" component={ PlantSave }/>
       <Screen name="MyPlants" component={ MyPlants }/>
     </Navigator>

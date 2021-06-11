@@ -8,7 +8,7 @@ import { isBefore, format } from 'date-fns'
 import { Button } from '../../components/Button'
 import waterDrop from './../../assets/waterdrop.png'
 import {
-  Container, PlantInfo, PlantName, PlantAbout, Controller, TipContainer, TipImage, TipText,
+  ScrollContainer, Container, PlantInfo, PlantName, PlantAbout, Controller, TipContainer, TipImage, TipText,
   AlertLabel, TimePickerButton, TimePickerText
 } from './style'
 import { savePlant } from '../../utils/savePlant'
@@ -74,45 +74,47 @@ export const PlantSave: React.FC = () => {
   }
 
   return (
-    <Container>
-      <PlantInfo>
-        <SvgFromUri uri={plant.photo} width={ 150 } height={ 150 }/>
+    <ScrollContainer>
+      <Container>
+        <PlantInfo>
+          <SvgFromUri uri={plant.photo} width={ 150 } height={ 150 }/>
 
-        <PlantName>{plant.name}</PlantName>
-        <PlantAbout>{plant.about}</PlantAbout>
-      </PlantInfo>
+          <PlantName>{plant.name}</PlantName>
+          <PlantAbout>{plant.about}</PlantAbout>
+        </PlantInfo>
 
-      <Controller>
-        <TipContainer>
-          <TipImage source={waterDrop}/>
-          <TipText>{plant.water_tips
-          }</TipText>
-        </TipContainer>
+        <Controller>
+          <TipContainer>
+            <TipImage source={waterDrop}/>
+            <TipText>{plant.water_tips
+            }</TipText>
+          </TipContainer>
 
-        <AlertLabel>Escolha o melhor horário para ser lemabrado</AlertLabel>
+          <AlertLabel>Escolha o melhor horário para ser lemabrado</AlertLabel>
 
-        { showDatePicker && (
-            <DateTimePicker
-              value={selectedDateTime}
-              mode="time"
-              display="spinner"
-              onChange={ handleChangeTime }
-            />
-        )}
+          { showDatePicker && (
+              <DateTimePicker
+                value={selectedDateTime}
+                mode="time"
+                display="spinner"
+                onChange={ handleChangeTime }
+              />
+          )}
 
-        { Platform.OS === 'android' && (
-          <TimePickerButton onPress={ handleDateTimePickerForAndroid }>
-            <TimePickerText>
-              {`Mudar horário ${format(selectedDateTime, 'HH:mm')}`}
-            </TimePickerText>
-          </TimePickerButton>
-        )}
+          { Platform.OS === 'android' && (
+            <TimePickerButton onPress={ handleDateTimePickerForAndroid }>
+              <TimePickerText>
+                {`Mudar horário ${format(selectedDateTime, 'HH:mm')}`}
+              </TimePickerText>
+            </TimePickerButton>
+          )}
 
-        <Button
-          title="Cadastrar Planta"
-          onPress={ () => handleSave(plant) }
-        />
-      </Controller>
-    </Container>
+          <Button
+            title="Cadastrar Planta"
+            onPress={ () => handleSave(plant) }
+          />
+        </Controller>
+      </Container>
+    </ScrollContainer>
   )
 }

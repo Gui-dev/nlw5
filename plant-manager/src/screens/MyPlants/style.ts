@@ -38,14 +38,14 @@ export const SpotlightText = styled.Text`
 export const Plants = styled.View`
   flex: 1;
   width: 100%;
-  margin-top: 20px;
+  margin-top: 10px;
 `
 
 export const PlantsTitle = styled.Text`
   font-size: 24px;
   font-family: ${fonts.heading};
   color: ${colors.heading};
-  margin: 20px 0;
+  margin: 10px 0;
 `
 
 export const PlantList = styled.FlatList.attrs({

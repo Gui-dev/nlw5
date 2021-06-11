@@ -17,7 +17,8 @@ export const TabRoutes: React.FC = () => {
         labelPosition: 'beside-icon',
         style: {
           paddingVertical: 20,
-          height: 88
+          paddingBottom: 20,
+          height: 60
         }
       }}
     >
@@ -25,7 +26,7 @@ export const TabRoutes: React.FC = () => {
         name="NovaPlanta"
         component={PlantSelect}
         options={{
-          tabBarLabel: 'Nova Planta',
+          title: 'Nova Planta',
           // eslint-disable-next-line react/display-name
           tabBarIcon: ({ size, color }: {size: number, color: string}) => (
             <MaterialIcons name="add-circle-outline" size={size} color={color}/>
@@ -37,7 +38,7 @@ export const TabRoutes: React.FC = () => {
         name="MyPlants"
         component={MyPlants}
         options={{
-          tabBarLabel: 'Minhas Plantas',
+          title: 'Minhas Plantas',
           // eslint-disable-next-line react/display-name
           tabBarIcon: ({ size, color }: {size: number, color: string}) => (
             <MaterialIcons name="format-list-bulleted" size={size} color={color}/>

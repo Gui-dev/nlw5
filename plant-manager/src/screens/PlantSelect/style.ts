@@ -45,7 +45,7 @@ export const ButtonList = styled.FlatList.attrs({
 export const PlantsContainer = styled.View`
   flex: 1;
   justify-content: center;
-  padding: 10px 32px 20px 32px;
+  padding: 0 32px;
 `
 
 export const PlantsList = styled.FlatList.attrs({

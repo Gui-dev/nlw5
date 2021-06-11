@@ -4,6 +4,10 @@ import { getBottomSpace } from 'react-native-iphone-x-helper'
 import colors from '../../styles/colors'
 import fonts from '../../styles/fonts'
 
+export const ScrollContainer = styled.ScrollView.attrs({
+  showsVerticalScrollIndicator: false
+})``
+
 export const Container = styled.View`
   flex: 1;
   justify-content: space-around;

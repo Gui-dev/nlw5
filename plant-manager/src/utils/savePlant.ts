@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { format } from 'date-fns'
 
-interface IPlantSaveProps {
+export interface IPlantProps {
   id: number
   name: string
   photo: string
@@ -16,13 +16,13 @@ interface IPlantSaveProps {
   hour: string
 }
 
-interface IStoragePlantsProps {
+export interface IStoragePlantsProps {
   [id: string]: {
-    data: IPlantSaveProps
+    data: IPlantProps
   }
 }
 
-export const savePlant = async (plant: IPlantSaveProps): Promise<void> => {
+export const savePlant = async (plant: IPlantProps): Promise<void> => {
   try {
     const data = await AsyncStorage.getItem('@plantmanager:plants')
     const oldPlants = data ? (JSON.parse(data) as IStoragePlantsProps) : {}
@@ -42,7 +42,7 @@ export const savePlant = async (plant: IPlantSaveProps): Promise<void> => {
   }
 }
 
-export const loadPlants = async (): Promise<IPlantSaveProps[]> => {
+export const loadPlants = async (): Promise<IPlantProps[]> => {
   try {
     const data = await AsyncStorage.getItem('@plantmanager:plants')
     const allPlants = data ? (JSON.parse(data) as IStoragePlantsProps) : {}
@@ -64,4 +64,12 @@ export const loadPlants = async (): Promise<IPlantSaveProps[]> => {
   } catch (error) {
     throw new Error(error)
   }
+}
+
+export const deletePlant = async (id: number): Promise<void> => {
+  const data = await AsyncStorage.getItem('@plantmanager:plants')
+  const plants = data ? (JSON.parse(data) as IStoragePlantsProps) : {}
+  delete plants[id]
+
+  await AsyncStorage.setItem('@plantmanager:plants', JSON.stringify(plants))
 }

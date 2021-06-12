@@ -5,7 +5,6 @@ import { Welcome } from './../screens/Welcome'
 import { UserIdentification } from './../screens/UserIdentification'
 import { Confirmation } from './../screens/Confirmation'
 import { PlantSave } from './../screens/PlantSave'
-import { MyPlants } from './../screens/MyPlants'
 
 import { TabRoutes } from './tab.routes'
 
@@ -26,7 +25,7 @@ export const StackRoutes: React.FC = () => {
       <Screen name="Confirmation" component={ Confirmation }/>
       <Screen name="PlantSelect" component={ TabRoutes }/>
       <Screen name="PlantSave" component={ PlantSave }/>
-      <Screen name="MyPlants" component={ MyPlants }/>
+      <Screen name="MyPlants" component={ TabRoutes }/>
     </Navigator>
   )
 }

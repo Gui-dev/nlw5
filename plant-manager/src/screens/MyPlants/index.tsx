@@ -1,5 +1,6 @@
 /* eslint-disable import/no-duplicates */
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
+import { Alert } from 'react-native'
 import { formatDistance } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 
@@ -7,8 +8,9 @@ import { Load } from '../../components/Load'
 import { Header } from '../../components/Header'
 import { loadPlants } from './../../utils/savePlant'
 import waterDrop from './../../assets/waterdrop.png'
-import { Container, Spotlight, Image, SpotlightText, Plants, PlantsTitle, PlantList } from './style'
 import { PlantCardSecondary } from '../../components/PlantCardSecondary'
+import { deletePlant } from './../../utils/savePlant'
+import { Container, Spotlight, Image, SpotlightText, Plants, PlantsTitle, PlantList } from './style'
 
 interface IMyPlantsProps {
   id: number
@@ -30,23 +32,42 @@ export const MyPlants: React.FC = () => {
   const [loading, setLoading] = useState(true)
   const [nextWatered, setNextWatered] = useState<string>()
 
-  useEffect(() => {
-    const loadStorageData = async () => {
-      const plantsStoraged = await loadPlants()
-
-      const nextTime = formatDistance(
-        new Date(plantsStoraged[0].dateTimeNotification).getTime(),
-        new Date().getTime(),
-        {
-          locale: ptBR
+  const handleRemove = useCallback((plant: IMyPlantsProps) => {
+    Alert.alert('Remover', `Deseja remover a ${plant.name} ?`, [
+      {
+        text: 'Não 😍',
+        style: 'cancel'
+      },
+      {
+        text: 'Sim 😢',
+        onPress: async () => {
+          try {
+            await deletePlant(plant.id)
+            setMyPlants(oldData => oldData.filter(item => item.id !== plant.id))
+          } catch {
+            Alert.alert('Ooops, Deu erro', 'Erro ao tentar apagar, tente novamente mais tarde!')
+          }
         }
-      )
+      }
+    ])
+  }, [deletePlant])
 
-      setNextWatered(`Não esqueça de regar a ${plantsStoraged[0].name} em ${nextTime}`)
-      setMyPlants(plantsStoraged)
-      setLoading(false)
-    }
+  const loadStorageData = async () => {
+    const plantsStoraged = await loadPlants()
+    const nextTime = formatDistance(
+      new Date(plantsStoraged[0].dateTimeNotification).getTime(),
+      new Date().getTime(),
+      {
+        locale: ptBR
+      }
+    )
 
+    setNextWatered(`Não esqueça de regar a ${plantsStoraged[0].name} em ${nextTime}`)
+    setMyPlants(plantsStoraged)
+    setLoading(false)
+  }
+
+  useEffect(() => {
     loadStorageData()
   }, [])
 
@@ -74,6 +95,7 @@ export const MyPlants: React.FC = () => {
             return (
               <PlantCardSecondary
                 data={{ name: item.name, photo: item.photo, hour: item.hour }}
+                handleRemove={ () => handleRemove(item) }
               />
             )
           }}

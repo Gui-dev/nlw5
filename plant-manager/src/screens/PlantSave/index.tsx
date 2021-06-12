@@ -60,7 +60,6 @@ export const PlantSave: React.FC = () => {
         ...plant,
         dateTimeNotification: selectedDateTime
       })
-      Alert.alert('Plantinha Salvada com sucesso', 'Sua plantinha está salva 🌱')
       navigate('Confirmation', {
         title: 'Tudo certo',
         subtitle: 'Fique tranquilo que sempre vamos lembrar você de cuidar da sua plantinha com bastante amor',

@@ -1,10 +1,12 @@
 import { StatusBar } from 'expo-status-bar'
 import 'react-native-gesture-handler'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useFonts, Jost_400Regular, Jost_600SemiBold } from '@expo-google-fonts/jost'
 import { View } from 'react-native'
 import AppLoading from 'expo-app-loading'
+import * as Notifications from 'expo-notifications'
 
+import { IPlantProps } from './src/utils/savePlant'
 import { Routes } from './src/routes'
 
 export default function App () {
@@ -12,6 +14,16 @@ export default function App () {
     Jost_400Regular,
     Jost_600SemiBold
   })
+
+  useEffect(() => {
+    const subscription = Notifications.addNotificationReceivedListener(
+      async notification => {
+        const data = notification.request.content.data.plant as IPlantProps
+        console.log(data)
+      }
+    )
+    return () => subscription.remove()
+  }, [])
 
   if (!fontsLoaded) {
     return (

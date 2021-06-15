@@ -13,12 +13,12 @@ Plant Manager is an app to remind people to water their plants.
 
 # Screens
 
-![Home](./screens/home.jpg)
-![Name user](./screens/name_use.jpg)
-![Confirmation](./screens/confirmation.jpg)
-![Plant home](./screens/home_plant.jpg)
-![Plant list](./screens/plant_list.jpg)
-![Plant delete](./screens/plant_delete.jpg)
+![Home](./screens/home.jpg =150x200)
+![Name user](./screens/name_user.jpg =150x200)
+![Confirmation](./screens/confirmation.png =150x200)
+![Plant home](./screens/home_plant.png =150x200)
+![Plant list](./screens/plant_list.png =150x200)
+![Plant delete](./screens/plant_delete.png =150x200)
 
 ## Technologies used
   - [React Native](https://reactnative.dev)
